@@ -12,12 +12,12 @@ $application = new \Hachi\Alibaba\Application([
     /**
      * access_key_id
      */
-    'access_key_id'     => 'x',
+    'access_key_id'     => 'access_key_id',
 
     /**
      * access_key_secret
      */
-    'access_key_secret' => 'x',
+    'access_key_secret' => 'access_key_secret',
     'response_type'     => 'collection',
 
     /**
@@ -38,14 +38,29 @@ $application = new \Hachi\Alibaba\Application([
         /**
          * 回信地址
          */
-        'reply_address' => ''
+        'reply_address' => true
 
 
     ]
 ]);
 
+
+$html = "
+<p>这个是段落</p>
+";
+
+$htmlMessage = new \Hachi\Alibaba\DirectMail\HtmlMessage($html);
+
 try {
-    $body = $application->direct_mail->singleSend('hachi.zzq@gmail.com', new \Hachi\Alibaba\DirectMail\TextMessage('12'), 'hello', 'e');
+    $body = $application->direct_mail->singleSend('hachi.zzq@gmail.com', $htmlMessage, '发送别名', '这个是主题');
+} catch (\Hachi\Alibaba\Kernel\Exceptions\MailSendException $exception) {
+    dd($exception);
+}
+
+dd($body);
+
+try {
+    $body = $application->direct_mail->singleSend('hachi.zzq@gmail.com', new \Hachi\Alibaba\DirectMail\TextMessage('这是个测试'), 'hello', 'e');
 } catch (\Hachi\Alibaba\Kernel\Exceptions\MailSendException $exception) {
     dd($exception);
 }

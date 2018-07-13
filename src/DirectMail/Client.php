@@ -40,7 +40,6 @@ class Client extends BaseClient
             'ClickTrace'     => 1
         ];
 
-
         if ($fromAlias || isset($config['direct_mail']['from_alias'])) {
             $params['FromAlias'] = $fromAlias ? $fromAlias : $config['direct_mail']['from_alias'];
         }

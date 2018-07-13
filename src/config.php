@@ -32,10 +32,8 @@ return [
         'from_alias'    => '',
 
         /**
-         * 回信地址
+         * 是否使用阿里云管理后台配置的回信地址
          */
-        'reply_address' => ''
-
-
+        'reply_address' => false
     ]
 ];

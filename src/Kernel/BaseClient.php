@@ -12,9 +12,7 @@
 namespace Hachi\Alibaba\Kernel;
 
 use GuzzleHttp\Client;
-use Hachi\Alibaba\Kernel\Support\Http\Response;
-use GuzzleHttp\MessageFormatter;
-use GuzzleHttp\Middleware;
+use Hachi\Alibaba\Kernel\Http\Response;
 use Psr\Http\Message\RequestInterface;
 use Hachi\Alibaba\Traits\HasHttpRequests;
 use Hachi\Alibaba\Kernel\Contracts\SignInterface;
