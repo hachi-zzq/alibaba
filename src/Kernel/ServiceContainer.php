@@ -125,7 +125,7 @@ class ServiceContainer extends Container
     public function registerProviders(array $providers)
     {
         foreach ($providers as $provider) {
-            parent::register(new $provider());
+            $this->register(new $provider());
         }
     }
 }
