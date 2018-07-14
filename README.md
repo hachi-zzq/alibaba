@@ -8,6 +8,7 @@
 这个 SDK 包含阿里云部分云产品，目前已经集成的包括以下服务：
 
 - 邮件推送
+- 语言合成（TTS）
 
 
 ## 如何安装
@@ -133,5 +134,13 @@ try {
 }
 
 dd($body);
+
+
+### 调用语言合成
+
+$outSteam = $application->tts->speak('我是文本');
+
+file_put_contents('/tmp/demo.mp3',$outSteam);
+
 
 ```

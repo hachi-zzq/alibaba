@@ -12,12 +12,12 @@ $application = new \Hachi\Alibaba\Application([
     /**
      * access_key_id
      */
-    'access_key_id'     => 'access_key_id',
+    'access_key_id'     => 'x',
 
     /**
      * access_key_secret
      */
-    'access_key_secret' => 'access_key_secret',
+    'access_key_secret' => 'x',
     'response_type'     => 'collection',
 
     /**
@@ -43,6 +43,12 @@ $application = new \Hachi\Alibaba\Application([
 
     ]
 ]);
+
+$steam = $application->tts->speak('我的文本');
+
+file_put_contents('/tmp/abc.mp3',$steam);
+
+dd();
 
 
 $html = "

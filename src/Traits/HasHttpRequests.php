@@ -148,7 +148,10 @@ trait HasHttpRequests
         }
 
         $response = $this->getHttpClient()->request($method, $url, $options);
-        $response->getBody()->rewind();
+
+        try{
+            $response->getBody()->rewind();
+        }catch (\Exception $exception){}
 
         return $response;
     }

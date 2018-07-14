@@ -11,6 +11,7 @@
 
 namespace Hachi\Alibaba\Kernel;
 
+use function Couchbase\defaultDecoder;
 use GuzzleHttp\Client;
 use Hachi\Alibaba\Kernel\Http\Response;
 use Psr\Http\Message\RequestInterface;
@@ -157,7 +158,6 @@ class BaseClient
         }
 
         $response = $this->performRequest($url, $method, $options);
-
         return $returnRaw ? $response : $this->castResponseToType($response, $this->app->config->get('response_type'));
     }
 
