@@ -57,16 +57,16 @@ class Sign implements SignInterface
     public function applyToRequest(RequestInterface $request, array $requestOptions = []): RequestInterface
     {
         if (strtoupper($request->getMethod()) == 'GET') {
-            $params = urldecode($request->getUri()->getQuery());
+            $params = $request->getUri()->getQuery();
         } else {
-            $params = urldecode($request->getBody()->getContents());
+            $params = $request->getBody()->getContents();
         }
 
         $parameters = [];
 
         foreach (explode('&', $params) as $value) {
             $explodeValue = explode('=', $value);
-            $parameters[$explodeValue[0]] = $explodeValue[1];
+            $parameters[$explodeValue[0]] = urldecode($explodeValue[1]);
         }
 
         $parameters['Format'] = 'JSON';
