@@ -34,6 +34,11 @@ return [
         /**
          * 是否使用阿里云管理后台配置的回信地址
          */
-        'reply_address' => false
+        'reply_address' => false,
+
+        /**
+         * 是否开启邮件追踪
+         */
+        'click_trace'   => false
     ]
 ];

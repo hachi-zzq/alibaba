@@ -4,7 +4,6 @@ namespace Hachi\Alibaba\DirectMail;
 
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
-use GuzzleHttp\Exception\TransferException;
 use Hachi\Alibaba\Kernel\BaseClient;
 use Hachi\Alibaba\Kernel\Exceptions\MailSendException;
 
@@ -24,6 +23,7 @@ class Client extends BaseClient
      * @param null $fromAlias
      * @param null $subject
      * @return array|\EasyWeChat\Kernel\Support\Collection|object|\Psr\Http\Message\ResponseInterface|string
+     * @throws MailSendException
      */
     public function singleSend($toAddress, Message $message, $fromAlias = null, $subject = null)
     {
@@ -37,7 +37,7 @@ class Client extends BaseClient
             'AddressType'    => 1,
             'ToAddress'      => is_array($toAddress) ? implode(',', $toAddress) : $toAddress,
             'Subject'        => $subject,
-            'ClickTrace'     => 1
+            'ClickTrace'     => $config['direct_mail']['click_trace'] ? 1 : 0,
         ];
 
         if ($fromAlias || isset($config['direct_mail']['from_alias'])) {
