@@ -138,9 +138,9 @@ dd($body);
 
 ### 调用语言合成
 
-$outSteam = $application->tts->speak('我是文本');
+$outStream = $application->tts->speak('我是文本');
 
-file_put_contents('/tmp/demo.mp3',$outSteam);
+file_put_contents('/tmp/demo.mp3',$outStream);
 
 
 ```
