@@ -5,6 +5,7 @@ namespace Hachi\Alibaba\DirectMail;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
 use Hachi\Alibaba\Kernel\BaseClient;
+use Hachi\Alibaba\Kernel\Exceptions\InvalidAddressException;
 use Hachi\Alibaba\Kernel\Exceptions\MailSendException;
 
 class Client extends BaseClient
@@ -49,14 +50,18 @@ class Client extends BaseClient
         } elseif ($message instanceof TextMessage) {
             $params['TextBody'] = $messageContent;
         }
-        try{
+        try {
             $response = $this->httpPost(self::API, $params);
-        }catch (ClientException | ServerException $exception){
-            $responseContent = json_decode($exception->getResponse()->getBody()->getContents(),true);
+        } catch (ClientException | ServerException $exception) {
+            $responseContent = json_decode($exception->getResponse()->getBody()->getContents(), true);
+            $code = $responseContent['code'] ?? '';
+            if ($code == 'InvalidToAddress.Spam') {
+                throw new InvalidAddressException($responseContent['Message'] ?? '', 0, $toAddress);
+            }
             throw new MailSendException($responseContent['Message'] ?? '');
         }
 
-        if(isset($response['Message'])){
+        if (isset($response['Message'])) {
             throw new MailSendException($response['Message']);
         }
 
